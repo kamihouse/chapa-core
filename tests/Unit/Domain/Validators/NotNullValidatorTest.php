@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Frete\Core\Domain\Validators\NotNullValidator;
+use Chapa\Core\Domain\Validators\NotNullValidator;
 use Tests\TestCase;
 
 class NotNullValidatorTest extends TestCase

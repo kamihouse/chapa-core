@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Domain\Validators;
+namespace Chapa\Core\Domain\Validators;
 
 class LengthValidator extends Validator
 {
-    private ?bool $isValid = null;
+    private bool $isValid = false;
 
-    public function __construct(private int $minLength, private int $maxLength)
-    {
-    }
+    public function __construct(private int $minLength, private int $maxLength) {}
 
     public function validate(mixed $input): bool
     {
@@ -20,9 +18,9 @@ class LengthValidator extends Validator
     }
 
     /**
-     * @return null|array|string
+     * @return null|string
      */
-    public function getErrorMessage(): array|string|null
+    public function getErrorMessage(): string|null
     {
         return !$this->isValid ? 'Invalid length' : null;
     }

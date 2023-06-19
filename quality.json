@@ -1,0 +1,222 @@
+[
+    {
+        "description": "Method Chapa\\Core\\Domain\\Validators\\OptionalDateValidator::isString() is unused.",
+        "fingerprint": "abc968f347049401122d3d3dc5ca13913269712320499f18b8deb8c8d8414cfe",
+        "severity": "major",
+        "location": {
+            "path": "src/Domain/Validators/OptionalDateValidator.php",
+            "lines": {
+                "begin": 32
+            }
+        }
+    },
+    {
+        "description": "Method Chapa\\Core\\Domain\\Validators\\OptionalDateValidator::isAValidDate() is unused.",
+        "fingerprint": "3dc2c54e2696606872dff61c3290d2a1ead0ad1ee85100f6f63a31f6a98fcaf7",
+        "severity": "major",
+        "location": {
+            "path": "src/Domain/Validators/OptionalDateValidator.php",
+            "lines": {
+                "begin": 37
+            }
+        }
+    },
+    {
+        "description": "Method Ecotone\\Enqueue\\InboundMessageConverter::toMessage() invoked with 2 parameters, 3 required.",
+        "fingerprint": "ac875a324b5cca6bbc5ffa305303405c6647645f34186b6ba1674ed520da9a13",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/CustomEnqueueInboundChannelAdapter.php",
+            "lines": {
+                "begin": 49
+            }
+        }
+    },
+    {
+        "description": "Property Chapa\\Core\\Infrastructure\\Ecotone\\Brokers\\CustomEnqueueOutboundChannelAdapter::$outboundMessage has unknown class Ecotone\\Enqueue\\OutboundMessage as its type.",
+        "fingerprint": "b31254302157b6b8a13bf8c74d5cfe6dad3fc98636fc7f319ff9ef7fa2023267",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/CustomEnqueueOutboundChannelAdapter.php",
+            "lines": {
+                "begin": 15
+            }
+        }
+    },
+    {
+        "description": "Parameter $outboundMessageConverter of method Chapa\\Core\\Infrastructure\\Ecotone\\Brokers\\CustomEnqueueOutboundChannelAdapter::__construct() has invalid type Ecotone\\Enqueue\\OutboundMessageConverter.",
+        "fingerprint": "f98dcc3a94549f9e309effda79f77c4e40fb18ceef8aa641f9c8ed13fbc5b59c",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/CustomEnqueueOutboundChannelAdapter.php",
+            "lines": {
+                "begin": 22
+            }
+        }
+    },
+    {
+        "description": "Property Chapa\\Core\\Infrastructure\\Ecotone\\Brokers\\CustomEnqueueOutboundChannelAdapter::$outboundMessageConverter has unknown class Ecotone\\Enqueue\\OutboundMessageConverter as its type.",
+        "fingerprint": "e1ce3a4aece13580f72753561367b32dd8eb102340845ab2150822c301fc6b19",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/CustomEnqueueOutboundChannelAdapter.php",
+            "lines": {
+                "begin": 22
+            }
+        }
+    },
+    {
+        "description": "Call to method getTimeToLive() on an unknown class Ecotone\\Enqueue\\OutboundMessage.",
+        "fingerprint": "35bb6a3ddc1341086741cb81870ea3eda8271fded0fe22a313c6834c8235d47e",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/CustomEnqueueOutboundChannelAdapter.php",
+            "lines": {
+                "begin": 36
+            }
+        }
+    },
+    {
+        "description": "Call to method getDeliveryDelay() on an unknown class Ecotone\\Enqueue\\OutboundMessage.",
+        "fingerprint": "a81978701cb8a62acdd2b4a493790a03b4bca1ceef521290fa43427cbce17b04",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/CustomEnqueueOutboundChannelAdapter.php",
+            "lines": {
+                "begin": 37
+            }
+        }
+    },
+    {
+        "description": "Call to method prepare() on an unknown class Ecotone\\Enqueue\\OutboundMessageConverter.",
+        "fingerprint": "da2a24525d57d356f9aac2e4a1e9a35efbb0348a92f45b963e12c5e17ba8578a",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/CustomEnqueueOutboundChannelAdapter.php",
+            "lines": {
+                "begin": 43
+            }
+        }
+    },
+    {
+        "description": "Method Ecotone\\Enqueue\\EnqueueInboundChannelAdapter::__construct() invoked with 6 parameters, 7 required.",
+        "fingerprint": "dd88014e82727f696523ea672dfb8107e4b725d3d0d28e7dac1ae3d31afb8527",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/Kafka/KafkaInboundChannelAdapter.php",
+            "lines": {
+                "begin": 28
+            }
+        }
+    },
+    {
+        "description": "Static method Ecotone\\Messaging\\MessageConverter\\DefaultHeaderMapper::createWith() invoked with 3 parameters, 2 required.",
+        "fingerprint": "172f7c2fc3d88cac60748876e57e935d8a8d2919ece21ceef5821907fc9632cb",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/Kafka/KafkaInboundChannelAdapterBuilder.php",
+            "lines": {
+                "begin": 39
+            }
+        }
+    },
+    {
+        "description": "Class Ecotone\\Enqueue\\InboundMessageConverter constructor invoked with 3 parameters, 4 required.",
+        "fingerprint": "0ae76ae17986c9ebd42ee060e0934ca4d5f2afb8ed26adfda1592d0d9b746f65",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/Kafka/KafkaInboundChannelAdapterBuilder.php",
+            "lines": {
+                "begin": 47
+            }
+        }
+    },
+    {
+        "description": "Parameter $outboundMessageConverter of method Chapa\\Core\\Infrastructure\\Ecotone\\Brokers\\Kafka\\KafkaOutboundChannelAdapter::__construct() has invalid type Ecotone\\Enqueue\\OutboundMessageConverter.",
+        "fingerprint": "1c2a566175d5785b14399e97d9b2255c9091f62395569d4c09f19b0bc4270f57",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/Kafka/KafkaOutboundChannelAdapter.php",
+            "lines": {
+                "begin": 16
+            }
+        }
+    },
+    {
+        "description": "Parameter #2 $fromMessageHeadersMapping of static method Ecotone\\Messaging\\MessageConverter\\DefaultHeaderMapper::createWith() expects array<string>, Ecotone\\Messaging\\MessageConverter\\HeaderMapper given.",
+        "fingerprint": "92440e7d93ab8a6823e27216465d420e953c99f1e381e185d61f164f7d7fa91a",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/Kafka/KafkaOutboundChannelAdapterBuilder.php",
+            "lines": {
+                "begin": 39
+            }
+        }
+    },
+    {
+        "description": "Static method Ecotone\\Messaging\\MessageConverter\\DefaultHeaderMapper::createWith() invoked with 3 parameters, 2 required.",
+        "fingerprint": "79e7a6a9f50f9de961fdb08f2b4d28b9fe0aa308108700b89aa87d2ffc8be92a",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/Kafka/KafkaOutboundChannelAdapterBuilder.php",
+            "lines": {
+                "begin": 39
+            }
+        }
+    },
+    {
+        "description": "Instantiated class Ecotone\\Enqueue\\OutboundMessageConverter not found.",
+        "fingerprint": "bc95b64d4a30cd131afe5de060356f50b9ab7daf76ebc16de32f44d0bc244c76",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/Kafka/KafkaOutboundChannelAdapterBuilder.php",
+            "lines": {
+                "begin": 44
+            }
+        }
+    },
+    {
+        "description": "Parameter $outboundMessageConverter of method Chapa\\Core\\Infrastructure\\Ecotone\\Brokers\\Sqs\\CustomSqsOutboundChannelAdapter::__construct() has invalid type Ecotone\\Enqueue\\OutboundMessageConverter.",
+        "fingerprint": "5f568a051114d655c1ad06996ccec3e6168f244fcc27f8a629d2e1cadb16edb1",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/Sqs/CustomSqsOutboundChannelAdapter.php",
+            "lines": {
+                "begin": 14
+            }
+        }
+    },
+    {
+        "description": "Parameter #2 $fromMessageHeadersMapping of static method Ecotone\\Messaging\\MessageConverter\\DefaultHeaderMapper::createWith() expects array<string>, Ecotone\\Messaging\\MessageConverter\\HeaderMapper given.",
+        "fingerprint": "949168c710100b23e521229aeac723fcdcb41a01ef3d75759c85cef78d5cc7c4",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/Sqs/CustomSqsOutboundChannelAdapterBuilder.php",
+            "lines": {
+                "begin": 36
+            }
+        }
+    },
+    {
+        "description": "Static method Ecotone\\Messaging\\MessageConverter\\DefaultHeaderMapper::createWith() invoked with 3 parameters, 2 required.",
+        "fingerprint": "7f468d563a9a54c22bd56f104a91a2b9fbd1e40e33b26a5955b5a4bc984bcf1c",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/Sqs/CustomSqsOutboundChannelAdapterBuilder.php",
+            "lines": {
+                "begin": 36
+            }
+        }
+    },
+    {
+        "description": "Instantiated class Ecotone\\Enqueue\\OutboundMessageConverter not found.",
+        "fingerprint": "2d0c88881003caa751091b18a04dfc2e8f38063521703d7938d35597659db229",
+        "severity": "major",
+        "location": {
+            "path": "src/Infrastructure/Ecotone/Brokers/Sqs/CustomSqsOutboundChannelAdapterBuilder.php",
+            "lines": {
+                "begin": 41
+            }
+        }
+    }
+]

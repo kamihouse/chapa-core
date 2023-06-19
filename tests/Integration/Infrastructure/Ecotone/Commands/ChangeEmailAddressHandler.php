@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Integration\Infrastructure\Ecotone\Commands;
 
+use Chapa\Core\Application\Command;
 use Ecotone\Modelling\Attribute\CommandHandler;
-use Frete\Core\Application\Command;
 
 class ChangeEmailAddressHandler implements Command
 {
     #[CommandHandler]
-    public function handle(ChangeEmailAddressCommand $command) : void
+    public function handle(ChangeEmailAddressCommand $command): void
     {
         // retrieve user and change the email
     }

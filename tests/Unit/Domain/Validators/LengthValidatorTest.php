@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Frete\Core\Domain\Validators\LengthValidator;
+use Chapa\Core\Domain\Validators\LengthValidator;
 use Tests\TestCase;
 
 class LengthValidatorTest extends TestCase

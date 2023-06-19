@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Domain\Validators;
+namespace Chapa\Core\Domain\Validators;
 
 use ArrayObject;
 
@@ -11,8 +11,7 @@ class ValidatorComposite extends Validator
     public function __construct(
         protected ArrayObject $validators = new ArrayObject(),
         protected ArrayObject $errorMessage = new ArrayObject()
-    ) {
-    }
+    ) {}
 
     /**
      * @param Validator $validator

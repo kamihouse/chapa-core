@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Specifications;
 
-use Frete\Core\Domain\Specifications\{NotSpecification, Specification};
+use Chapa\Core\Domain\Specifications\{NotSpecification, Specification};
 use Tests\TestCase;
 
 class NotSpecificationTest extends TestCase

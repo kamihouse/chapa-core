@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Application\Errors;
+namespace Chapa\Core\Application\Errors;
 
 use ArrayObject;
 
 class ApplicationError
 {
-    public function __construct(private readonly ArrayObject $errors, private readonly ?string $domainName = null)
-    {
-    }
+    public function __construct(private readonly ArrayObject $errors, private readonly ?string $domainName = null) {}
 
     public function getErrors(): ArrayObject
     {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Infrastructure;
+namespace Chapa\Core\Infrastructure;
 
-use Frete\Core\Domain\IdGenerator;
+use Chapa\Core\Domain\IdGenerator;
 use Ramsey\Uuid\Uuid;
 
 class UuidGenerator implements IdGenerator

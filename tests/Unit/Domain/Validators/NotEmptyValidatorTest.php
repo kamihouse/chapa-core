@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Frete\Core\Domain\Validators\NotEmptyValidator;
+use Chapa\Core\Domain\Validators\NotEmptyValidator;
 use Tests\TestCase;
 
 class NotEmptyValidatorTest extends TestCase

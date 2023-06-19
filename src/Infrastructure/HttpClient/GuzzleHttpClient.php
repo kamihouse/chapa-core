@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Infrastructure\HttpClient;
+namespace Chapa\Core\Infrastructure\HttpClient;
 
 use Illuminate\Support\Facades\Http;
 

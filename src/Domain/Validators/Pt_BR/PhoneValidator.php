@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Domain\Validators\Pt_BR;
+namespace Chapa\Core\Domain\Validators\Pt_BR;
 
-use Frete\Core\Domain\Validators\Validator;
+use Chapa\Core\Domain\Validators\Validator;
 
 class PhoneValidator extends Validator
 {
-    private ?bool $isValid = null;
+    private bool $isValid = false;
 
     public function validate(mixed $input): bool
     {
@@ -22,9 +22,9 @@ class PhoneValidator extends Validator
     }
 
     /**
-     * @return null|array|string
+     * @return null|string
      */
-    public function getErrorMessage(): array|string|null
+    public function getErrorMessage(): string|null
     {
         return !$this->isValid ? 'Invalid phone number' : null;
     }

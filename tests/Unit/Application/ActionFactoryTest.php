@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Application;
 
+use Chapa\Core\Application\Action;
+use Chapa\Core\Application\{ActionFactory, IActionFactory};
 use Exception;
-use Frete\Core\Application\Action;
-use Frete\Core\Application\{ActionFactory, IActionFactory};
 use Tests\TestCase;
 use Tests\Unit\Application\Stubs\{ActionStub, ActionsEnumStub};
 

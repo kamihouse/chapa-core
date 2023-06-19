@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators\Pt_BR;
 
-use Frete\Core\Domain\Validators\Pt_BR\PhoneValidator;
+use Chapa\Core\Domain\Validators\Pt_BR\PhoneValidator;
 use Tests\TestCase;
 
 class PhoneValidatorTest extends TestCase

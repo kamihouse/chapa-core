@@ -2,15 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Infrastructure\Ecotone\Brokers;
+namespace Chapa\Core\Infrastructure\Ecotone\Brokers;
 
+use Chapa\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\IHeaderMessage;
+use Ecotone\Enqueue\OutboundMessage;
 use Ecotone\Enqueue\{CachedConnectionFactory, OutboundMessageConverter};
 use Ecotone\Messaging\{Message, MessageHandler, MessageHeaders};
-use Frete\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\IHeaderMessage;
-use Interop\Queue\Destination;
+use Interop\Queue\{Destination, Message as buildMessageReturn};
 
 abstract class CustomEnqueueOutboundChannelAdapter implements MessageHandler
 {
+    private OutboundMessage $outboundMessage;
     private bool $initialized = false;
 
     public function __construct(
@@ -19,8 +21,7 @@ abstract class CustomEnqueueOutboundChannelAdapter implements MessageHandler
         protected bool $autoDeclare,
         protected OutboundMessageConverter $outboundMessageConverter,
         private IHeaderMessage $messageBrokerHeaders
-    ) {
-    }
+    ) {}
 
     abstract public function initialize(): void;
 
@@ -30,22 +31,21 @@ abstract class CustomEnqueueOutboundChannelAdapter implements MessageHandler
             $this->initialize();
             $this->initialized = true;
         }
-
-        $outboundMessage = $this->outboundMessageConverter->prepare($message);
-        $messageBrokerHeaders = $this->messageBrokerHeaders?->getSchema() ?? [];
-
-        $messageToSend = $this->connectionFactory->createContext()->createMessage(
-            $outboundMessage->getPayload(),
-            [
-                MessageHeaders::CONTENT_TYPE => $outboundMessage->getContentType(),
-                $outboundMessage->getHeaders()
-            ],
-            $messageBrokerHeaders
-        );
-
+        $messageToSend = $this->buildMessage($message);
         $this->connectionFactory->getProducer()
-            ->setTimeToLive($outboundMessage->getTimeToLive())
-            ->setDeliveryDelay($outboundMessage->getDeliveryDelay())
+            ->setTimeToLive($this->outboundMessage->getTimeToLive())
+            ->setDeliveryDelay($this->outboundMessage->getDeliveryDelay())
             ->send($this->destination, $messageToSend);
+    }
+
+    protected function buildMessage(Message $message): buildMessageReturn
+    {
+        $this->outboundMessage = $outboundMessage = $this->outboundMessageConverter->prepare($message);
+        $headers = $outboundMessage->getHeaders();
+        $headers[MessageHeaders::CONTENT_TYPE] = $outboundMessage->getContentType();
+
+        $messageBrokerHeaders = $this->messageBrokerHeaders->getSchema() ? $this->messageBrokerHeaders->getSchema() : [];
+
+        return $this->connectionFactory->createContext()->createMessage($outboundMessage->getPayload(), $headers, $messageBrokerHeaders);
     }
 }

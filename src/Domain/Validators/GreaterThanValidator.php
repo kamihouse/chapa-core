@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Domain\Validators;
+namespace Chapa\Core\Domain\Validators;
 
 class GreaterThanValidator extends Validator
 {
-    private ?bool $isValid = null;
+    private bool $isValid = false;
 
-    public function __construct(private int $min)
-    {
-    }
+    public function __construct(private int $min) {}
 
     public function validate(mixed $input): bool
     {
@@ -19,9 +17,9 @@ class GreaterThanValidator extends Validator
     }
 
     /**
-     * @return null|array|string
+     * @return null|string
      */
-    public function getErrorMessage(): array|string|null
+    public function getErrorMessage(): string|null
     {
         return !$this->isValid ? "Value must be numeric and greater than {$this->min}" : null;
     }

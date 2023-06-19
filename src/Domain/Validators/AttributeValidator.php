@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Domain\Validators;
+namespace Chapa\Core\Domain\Validators;
 
 class AttributeValidator extends Validator
 {
     public function __construct(
         public readonly string $attribute,
         protected ?Validator $validator = null
-    ) {
-    }
+    ) {}
 
     public function getValidator(): Validator
     {

@@ -2,18 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Infrastructure\Cache;
+namespace Chapa\Core\Infrastructure\Cache;
 
 use Attribute;
-use Frete\Shared\Decorator;
+use Chapa\Core\Shared\Decorator;
 use Psr\Cache\CacheItemPoolInterface;
 
 #[Attribute(Attribute::TARGET_METHOD)]
 class CacheDecorator implements Decorator
 {
-    public function __construct(private CacheItemPoolInterface $cachePool, private int $ttl, private ?string $cacheKey = null)
-    {
-    }
+    public function __construct(private CacheItemPoolInterface $cachePool, private int $ttl, private ?string $cacheKey = null) {}
 
     public function execute(callable $action, ?array $arguments = [])
     {

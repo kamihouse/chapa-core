@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Application;
+namespace Chapa\Core\Application;
 
-use Frete\Core\Shared\Result;
+use Chapa\Core\Shared\Result;
 
 interface Handler
 {

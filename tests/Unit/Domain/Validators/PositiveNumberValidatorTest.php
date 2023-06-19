@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Frete\Core\Domain\Validators\PositiveNumberValidator;
+use Chapa\Core\Domain\Validators\PositiveNumberValidator;
 use Tests\TestCase;
 
 class PositiveNumberValidatorTest extends TestCase

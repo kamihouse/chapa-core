@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Infrastructure;
+namespace Chapa\Core\Infrastructure;
 
 interface ArraySerialize
 {

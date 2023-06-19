@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Frete\Core\Domain\Validators\OneOfOptionsValidator;
+use Chapa\Core\Domain\Validators\OneOfOptionsValidator;
 use Tests\TestCase;
 
 class OneOfOptionsValidatorTest extends TestCase

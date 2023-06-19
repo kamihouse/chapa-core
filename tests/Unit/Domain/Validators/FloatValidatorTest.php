@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Frete\Core\Domain\Validators\FloatValidator;
+use Chapa\Core\Domain\Validators\FloatValidator;
 use Tests\TestCase;
 
 class FloatValidatorTest extends TestCase

@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Domain;
+namespace Chapa\Core\Domain;
 
 abstract class Entity
 {
-    protected function __construct(public readonly string $id)
-    {
-    }
+    protected function __construct(public readonly string $id) {}
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Infrastructure\HttpClient;
+namespace Chapa\Core\Infrastructure\HttpClient;
 
 class HttpClientResponse
 {
@@ -11,6 +11,5 @@ class HttpClientResponse
         public readonly mixed $data = null,
         public readonly object|array $headers = [],
         public readonly bool $isFailed = false
-    ) {
-    }
+    ) {}
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Domain;
+namespace Chapa\Core\Domain;
 
 use DateTimeImmutable;
 
@@ -14,6 +14,5 @@ abstract class DomainEvent
         public readonly ?string $schema = 'https://schema.org/',
         public readonly ?string $version = '1.0',
         public readonly ?DateTimeImmutable $occurredOn = new DateTimeImmutable()
-    ) {
-    }
+    ) {}
 }

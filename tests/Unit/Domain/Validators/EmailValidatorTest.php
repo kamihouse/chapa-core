@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Frete\Core\Domain\Validators\EmailValidator;
+use Chapa\Core\Domain\Validators\EmailValidator;
 use Tests\TestCase;
 
 class EmailValidatorTest extends TestCase

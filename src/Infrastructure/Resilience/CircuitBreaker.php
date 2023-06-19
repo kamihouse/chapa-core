@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Infrastructure\Resilience;
+namespace Chapa\Core\Infrastructure\Resilience;
 
 class CircuitBreaker
 {

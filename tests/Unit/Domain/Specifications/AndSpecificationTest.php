@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Specifications;
 
-use Frete\Core\Domain\Specifications\{AndSpecification, Specification};
+use Chapa\Core\Domain\Specifications\{AndSpecification, Specification};
 use Tests\TestCase;
 
 class AndSpecificationTest extends TestCase

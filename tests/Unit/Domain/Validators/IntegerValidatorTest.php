@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Frete\Core\Domain\Validators\IntegerValidator;
+use Chapa\Core\Domain\Validators\IntegerValidator;
 use Tests\TestCase;
 
 class IntegerValidatorTest extends TestCase

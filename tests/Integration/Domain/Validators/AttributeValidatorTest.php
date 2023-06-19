@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Integration\Domain\Validators;
 
 use ArrayObject;
-use Frete\Core\Domain\Validators\{AttributeValidator, FloatValidator, NotNullValidator, OneOfOptionsValidator, StringValidator};
-use Frete\Core\Domain\Validators\{ValidatorCollectionDecorator, ValidatorComposite};
+use Chapa\Core\Domain\Validators\{AttributeValidator, FloatValidator, NotNullValidator, OneOfOptionsValidator, StringValidator};
+use Chapa\Core\Domain\Validators\{ValidatorCollectionDecorator, ValidatorComposite};
 use stdClass;
 use Tests\TestCase;
 

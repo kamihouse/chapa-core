@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Application;
+namespace Chapa\Core\Application;
 
 use ArrayObject;
 use BackedEnum;

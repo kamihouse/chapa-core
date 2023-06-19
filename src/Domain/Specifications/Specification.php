@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Domain\Specifications;
+namespace Chapa\Core\Domain\Specifications;
 
 interface Specification
 {

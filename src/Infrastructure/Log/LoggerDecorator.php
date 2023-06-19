@@ -2,18 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Infrastructure\Log;
+namespace Chapa\Core\Infrastructure\Log;
 
 use Attribute;
-use Frete\Shared\Decorator;
+use Chapa\Core\Shared\Decorator;
 use Psr\Log\LoggerInterface;
 
 #[Attribute(Attribute::TARGET_METHOD)]
 class LoggerDecorator implements Decorator
 {
-    public function __construct(private LoggerInterface $logger)
-    {
-    }
+    public function __construct(private LoggerInterface $logger) {}
 
     public function execute(callable $action, ?array $arguments = [])
     {

@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Infrastructure\Errors;
+namespace Chapa\Core\Infrastructure\Errors;
 
 use ArrayObject;
 
 class InfrastructureError
 {
-    public function __construct(private readonly ArrayObject $errors, private readonly ?string $domainName = null)
-    {
-    }
+    public function __construct(private readonly ArrayObject $errors, private readonly ?string $domainName = null) {}
 
     public function getErrors(): ArrayObject
     {

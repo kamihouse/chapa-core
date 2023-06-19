@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Domain;
+namespace Chapa\Core\Domain;
 
 interface IdGenerator
 {

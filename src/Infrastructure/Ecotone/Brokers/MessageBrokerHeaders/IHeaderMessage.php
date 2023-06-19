@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders;
+namespace Chapa\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders;
 
 interface IHeaderMessage
 {

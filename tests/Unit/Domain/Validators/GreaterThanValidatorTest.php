@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Frete\Core\Domain\Validators\GreaterThanValidator;
+use Chapa\Core\Domain\Validators\GreaterThanValidator;
 use Tests\TestCase;
 
 class GreaterThanValidatorTest extends TestCase

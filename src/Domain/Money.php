@@ -2,13 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Domain;
+namespace Chapa\Core\Domain;
 
 class Money
 {
-    public function __construct(private float $amount)
-    {
-    }
+    public function __construct(private float $amount) {}
 
     /**
      * Get the value of amount.

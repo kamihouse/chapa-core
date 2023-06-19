@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration;
+namespace Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration;
 
+use Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\KafkaInboundChannelAdapterBuilder;
 use Ecotone\Enqueue\EnqueueMessageConsumerConfiguration;
 use Enqueue\RdKafka\RdKafkaConnectionFactory;
-use Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\KafkaInboundChannelAdapterBuilder;
 
 final class KafkaMessageConsumerConfiguration extends EnqueueMessageConsumerConfiguration
 {

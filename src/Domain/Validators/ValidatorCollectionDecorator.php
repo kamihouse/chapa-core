@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Domain\Validators;
+namespace Chapa\Core\Domain\Validators;
 
 use ArrayObject;
 
 class ValidatorCollectionDecorator extends Validator
 {
-    protected ArrayObject $errorMessage;
-
-    public function __construct(private Validator $validator)
-    {
-    }
+    public function __construct(
+        private Validator $validator,
+        protected ArrayObject $errorMessage = new ArrayObject()
+    ) {}
 
     /**
      * @param array $input

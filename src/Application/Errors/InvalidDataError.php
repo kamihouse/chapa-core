@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Application\Errors;
+namespace Chapa\Core\Application\Errors;
 
 class InvalidDataError extends ApplicationError
 {
     public function __construct(
         private readonly mixed $error
-    ) {
-    }
+    ) {}
 
     public function getError()
     {

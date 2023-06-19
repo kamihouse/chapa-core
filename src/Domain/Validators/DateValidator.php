@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Domain\Validators;
+namespace Chapa\Core\Domain\Validators;
 
 use DateTime;
 use Exception;
 
 class DateValidator extends Validator
 {
-    private ?bool $isValid = null;
+    private bool $isValid = false;
 
     public function validate(mixed $input): bool
     {
@@ -18,9 +18,9 @@ class DateValidator extends Validator
     }
 
     /**
-     * @return null|array|string
+     * @return null|string
      */
-    public function getErrorMessage(): array|string|null
+    public function getErrorMessage(): string|null
     {
         return !$this->isValid ? 'Invalid date format' : null;
     }

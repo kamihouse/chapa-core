@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Frete\Shared;
+namespace Chapa\Core\Shared;
 
 interface Decorator
 {

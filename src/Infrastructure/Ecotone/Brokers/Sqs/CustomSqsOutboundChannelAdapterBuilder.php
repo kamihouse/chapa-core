@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Infrastructure\Ecotone\Brokers\Sqs;
+namespace Chapa\Core\Infrastructure\Ecotone\Brokers\Sqs;
 
+use Chapa\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\DefaultMessageHeader;
 use Ecotone\Enqueue\{CachedConnectionFactory, EnqueueOutboundChannelAdapterBuilder, HttpReconnectableConnectionFactory, OutboundMessageConverter};
 use Ecotone\Messaging\Conversion\ConversionService;
 use Ecotone\Messaging\Handler\{ChannelResolver, ReferenceSearchService};
 use Ecotone\Messaging\MessageConverter\DefaultHeaderMapper;
 use Enqueue\Sqs\SqsConnectionFactory;
-use Frete\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\DefaultMessageHeader;
 
 class CustomSqsOutboundChannelAdapterBuilder extends EnqueueOutboundChannelAdapterBuilder
 {

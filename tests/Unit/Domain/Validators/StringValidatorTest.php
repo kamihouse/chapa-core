@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Frete\Core\Domain\Validators\StringValidator;
+use Chapa\Core\Domain\Validators\StringValidator;
 use Tests\TestCase;
 
 class StringValidatorTest extends TestCase

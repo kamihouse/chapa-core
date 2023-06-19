@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Application;
+namespace Chapa\Core\Application;
 
-use Frete\Core\Domain\DomainEvent;
+use Chapa\Core\Domain\DomainEvent;
 
 interface Broker
 {

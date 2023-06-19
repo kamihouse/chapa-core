@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Shared;
+namespace Chapa\Core\Shared;
 
 use Exception;
 
 class Result
 {
-    protected function __construct(protected bool $isSuccess, protected $value, protected $error)
-    {
-    }
+    protected function __construct(protected bool $isSuccess, protected $value, protected $error) {}
 
     public static function success($value): Result
     {

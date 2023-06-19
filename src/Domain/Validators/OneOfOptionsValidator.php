@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Domain\Validators;
+namespace Chapa\Core\Domain\Validators;
 
 class OneOfOptionsValidator extends Validator
 {
-    private ?bool $isValid = null;
+    private bool $isValid = false;
 
-    public function __construct(private array $validOptions = [])
-    {
-    }
+    public function __construct(private array $validOptions = []) {}
 
     public function setOptions(array $options): mixed
     {
@@ -25,9 +23,9 @@ class OneOfOptionsValidator extends Validator
     }
 
     /**
-     * @return null|array|string
+     * @return null|string
      */
-    public function getErrorMessage(): array|string|null
+    public function getErrorMessage(): string|null
     {
         return !$this->isValid ? 'Invalid option' : null;
     }

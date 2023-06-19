@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration;
+namespace Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration;
 
+use Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\KafkaOutboundChannelAdapterBuilder;
 use Ecotone\AnnotationFinder\AnnotationFinder;
 use Ecotone\Messaging\Attribute\ModuleAnnotation;
 use Ecotone\Messaging\Config\Annotation\AnnotationModule;
@@ -14,7 +15,6 @@ use Ecotone\Messaging\Handler\Gateway\GatewayProxyBuilder;
 use Ecotone\Messaging\Handler\Gateway\ParameterToMessageConverter\{GatewayHeaderBuilder, GatewayHeaderValueBuilder, GatewayHeadersBuilder, GatewayPayloadBuilder};
 use Ecotone\Messaging\Handler\InterfaceToCallRegistry;
 use Ecotone\Messaging\{MessageHeaders, MessagePublisher};
-use Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\KafkaOutboundChannelAdapterBuilder;
 
 #[ModuleAnnotation]
 final class KafkaMessagePublisherModule extends NoExternalConfigurationModule implements AnnotationModule
@@ -31,7 +31,6 @@ final class KafkaMessagePublisherModule extends NoExternalConfigurationModule im
         /** @var KafkaMessagePublisherConfiguration $messagePublisher */
         foreach (ExtensionObjectResolver::resolve(KafkaMessagePublisherConfiguration::class, $extensionObjects) as $messagePublisher) {
             $mediaType = $messagePublisher->getOutputDefaultConversionMediaType() ?: $serviceConfiguration->getDefaultSerializationMediaType();
-
             $messagingConfiguration
                 ->registerGatewayBuilder(
                     GatewayProxyBuilder::create($messagePublisher->getReferenceName(), MessagePublisher::class, 'send', $messagePublisher->getReferenceName())
@@ -64,7 +63,7 @@ final class KafkaMessagePublisherModule extends NoExternalConfigurationModule im
                         ])
                 )
                 ->registerMessageHandler(
-                    KafkaOutboundChannelAdapterBuilder::create($messagePublisher->getQueueName(), $messagePublisher->getConnectionReference())
+                    KafkaOutboundChannelAdapterBuilder::create($messagePublisher->getQueueName(), $messagePublisher->getConnectionReference(), $messagePublisher->getmessageBrokerHeadersReferenceName(), $messagePublisher->getKafkaTopicConfiguration())
                         ->withEndpointId($messagePublisher->getReferenceName() . '.handler')
                         ->withInputChannelName($messagePublisher->getReferenceName())
                         ->withAutoDeclareOnSend($messagePublisher->isAutoDeclareOnSend())

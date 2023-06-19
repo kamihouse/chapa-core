@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Specifications;
 
-use Frete\Core\Domain\Specifications\{OrSpecification, Specification};
+use Chapa\Core\Domain\Specifications\{OrSpecification, Specification};
 use Tests\TestCase;
 
 class OrSpecificationTest extends TestCase

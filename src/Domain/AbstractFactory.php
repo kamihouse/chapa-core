@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Frete\Core\Domain;
+namespace Chapa\Core\Domain;
 
 abstract class AbstractFactory
 {
     protected object $item;
 
-    abstract public function create(mixed $data = null): mixed;
+    abstract public function create(mixed $data = null, mixed $id = null): mixed;
 
     public static function buildEnum($className, $data): mixed
     {
