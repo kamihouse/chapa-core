@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Domain\Validators;
+namespace Frete\Core\Domain\Validators;
 
 class OptionalEmailValidator extends Validator
 {
@@ -12,15 +12,14 @@ class OptionalEmailValidator extends Validator
     {
         if (null === $input) {
             $this->isValid = true;
+
             return $this->isValid;
         }
         $this->isValid = (new EmailValidator())->validate($input);
+
         return $this->isValid;
     }
 
-    /**
-     * @return null|string
-     */
     public function getErrorMessage(): string|null
     {
         return !$this->isValid ? 'Invalid email address' : null;

@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\OptionalIntegerValidator;
+use Frete\Core\Domain\Validators\OptionalIntegerValidator;
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class OptionalIntegerValidatorTest extends TestCase
 {
     public function testShouldValidateInteger()

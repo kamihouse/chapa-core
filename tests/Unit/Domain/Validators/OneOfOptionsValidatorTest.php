@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\OneOfOptionsValidator;
+use Frete\Core\Domain\Validators\OneOfOptionsValidator;
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class OneOfOptionsValidatorTest extends TestCase
 {
     public function testShouldValidateOneOfOptions()

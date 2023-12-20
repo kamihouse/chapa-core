@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\OptionalFloatValidator;
+use Frete\Core\Domain\Validators\OptionalFloatValidator;
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class OptionalFloatValidatorTest extends TestCase
 {
     public function testShouldValidateFloat()

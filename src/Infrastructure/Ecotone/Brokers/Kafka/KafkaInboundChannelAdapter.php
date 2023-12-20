@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka;
+namespace Frete\Core\Infrastructure\Ecotone\Brokers\Kafka;
 
-use Chapa\Core\Infrastructure\Ecotone\Brokers\CustomEnqueueInboundChannelAdapter;
-use Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration\KafkaTopicConfiguration;
-use Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\Connection\KafkaConnectionFactory;
 use Ecotone\Enqueue\{CachedConnectionFactory, HttpReconnectableConnectionFactory, InboundMessageConverter};
 use Ecotone\Messaging\Endpoint\InboundChannelAdapterEntrypoint;
+use Frete\Core\Infrastructure\Ecotone\Brokers\CustomEnqueueInboundChannelAdapter;
+use Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration\KafkaTopicConfiguration;
+use Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\Connection\KafkaConnectionFactory;
 use GuzzleHttp\Exception\ConnectException;
 
 final class KafkaInboundChannelAdapter extends CustomEnqueueInboundChannelAdapter
@@ -62,6 +62,7 @@ final class KafkaInboundChannelAdapter extends CustomEnqueueInboundChannelAdapte
             if (-1001 == $val->getOffset()) {
                 $val->setOffset(0);
             }
+
             return $val;
         }, $kafkaConsumer->getCommittedOffsets($topicPartitions, 2000));
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Domain\Validators;
+namespace Frete\Core\Domain\Validators;
 
 class FloatValidator extends Validator
 {
@@ -11,12 +11,10 @@ class FloatValidator extends Validator
     public function validate(mixed $input): bool
     {
         $this->isValid = is_float($input);
+
         return $this->isValid;
     }
 
-    /**
-     * @return null|string
-     */
     public function getErrorMessage(): string|null
     {
         return !$this->isValid ? 'Invalid float number' : null;

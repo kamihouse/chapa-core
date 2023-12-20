@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\IntegerValidator;
+use Frete\Core\Domain\Validators\IntegerValidator;
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class IntegerValidatorTest extends TestCase
 {
     public function testShouldValidateInteger()

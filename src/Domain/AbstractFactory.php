@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Domain;
+namespace Frete\Core\Domain;
 
 abstract class AbstractFactory
 {
@@ -16,6 +16,7 @@ abstract class AbstractFactory
         if ($instance instanceof $className) {
             return $instance;
         }
+
         return null;
     }
 

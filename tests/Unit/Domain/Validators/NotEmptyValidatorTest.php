@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\NotEmptyValidator;
+use Frete\Core\Domain\Validators\NotEmptyValidator;
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class NotEmptyValidatorTest extends TestCase
 {
     public function testShouldValidateEmptyString()

@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Infrastructure\Ecotone\Brokers\Sqs;
+namespace Frete\Core\Infrastructure\Ecotone\Brokers\Sqs;
 
-use Chapa\Core\Infrastructure\Ecotone\Brokers\CustomEnqueueOutboundChannelAdapter;
-use Chapa\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\IHeaderMessage;
 use Ecotone\Enqueue\{CachedConnectionFactory, OutboundMessageConverter};
+use Enqueue\Sqs\SqsContext;
 use Enqueue\Sqs\SqsDestination;
+use Frete\Core\Infrastructure\Ecotone\Brokers\CustomEnqueueOutboundChannelAdapter;
+use Frete\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\IHeaderMessage;
 
 final class CustomSqsOutboundChannelAdapter extends CustomEnqueueOutboundChannelAdapter
 {
@@ -24,8 +25,8 @@ final class CustomSqsOutboundChannelAdapter extends CustomEnqueueOutboundChannel
 
     public function initialize(): void
     {
+        /** @var SqsContext */
         $context = $this->connectionFactory->createContext();
-        // @phpstan-ignore-next-line
         $context->declareQueue($context->createQueue($this->queueName));
     }
 }

@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Integration\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\{FloatValidator, ValidatorCollectionDecorator};
-use Chapa\Core\Domain\Validators\{NotNullValidator, StringValidator, ValidatorComposite};
+use Frete\Core\Domain\Validators\{FloatValidator, ValidatorCollectionDecorator};
+use Frete\Core\Domain\Validators\{NotNullValidator, StringValidator, ValidatorComposite};
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 final class ValidatorCompositeTest extends TestCase
 {
     protected ValidatorComposite $sut;
@@ -32,6 +35,7 @@ final class ValidatorCompositeTest extends TestCase
         $notNullStringValidator = new ValidatorComposite();
         $notNullStringValidator->addValidator($notNullValidator);
         $notNullStringValidator->addValidator($stringValidator);
+
         return $notNullStringValidator;
     }
 
@@ -42,6 +46,7 @@ final class ValidatorCompositeTest extends TestCase
         $notNullStringValidator = new ValidatorComposite();
         $notNullStringValidator->addValidator($notNullValidator);
         $notNullStringValidator->addValidator($stringValidator);
+
         return $notNullStringValidator;
     }
 
@@ -52,6 +57,7 @@ final class ValidatorCompositeTest extends TestCase
         $notNullFloatValidator = new ValidatorComposite();
         $notNullFloatValidator->addValidator($notNullValidator);
         $notNullFloatValidator->addValidator($floatValidator);
+
         return $notNullFloatValidator;
     }
 
@@ -62,6 +68,7 @@ final class ValidatorCompositeTest extends TestCase
         $notNullFloatValidator = new ValidatorComposite();
         $notNullFloatValidator->addValidator($notNullValidator);
         $notNullFloatValidator->addValidator($floatValidator);
+
         return $notNullFloatValidator;
     }
 
@@ -118,7 +125,7 @@ final class ValidatorCompositeTest extends TestCase
                 [
                     'Cannot be null',
                     'Invalid string',
-                ]
+                ],
             ],
         ];
 
@@ -156,7 +163,7 @@ final class ValidatorCompositeTest extends TestCase
                 [
                     'Cannot be null',
                     'Invalid float number',
-                ]
+                ],
             ],
         ];
 

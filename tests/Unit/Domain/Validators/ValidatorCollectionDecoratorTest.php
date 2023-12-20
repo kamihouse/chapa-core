@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\{Validator, ValidatorCollectionDecorator};
+use Frete\Core\Domain\Validators\{Validator, ValidatorCollectionDecorator};
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 final class ValidatorCollectionDecoratorTest extends TestCase
 {
     private ValidatorCollectionDecorator $sut;
@@ -20,7 +23,7 @@ final class ValidatorCollectionDecoratorTest extends TestCase
                 0 => 'error',
                 1 => 'error',
                 2 => 'error',
-            ]
+            ],
         ];
 
         $validator = $this->createStub(Validator::class);
@@ -31,7 +34,7 @@ final class ValidatorCollectionDecoratorTest extends TestCase
 
         $actual = [
             'isValid' => $this->sut->validate($input),
-            'errorMessage' => $this->sut->getErrorMessage()
+            'errorMessage' => $this->sut->getErrorMessage(),
         ];
 
         $this->assertEquals($expected, $actual);

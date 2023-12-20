@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Application;
+namespace Frete\Core\Application;
 
-interface Query extends Action {}
+abstract class Query extends Action
+{
+}

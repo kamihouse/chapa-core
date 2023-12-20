@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Domain\Validators;
+namespace Frete\Core\Domain\Validators;
 
 class NotEmptyValidator extends Validator
 {
@@ -11,12 +11,10 @@ class NotEmptyValidator extends Validator
     public function validate(mixed $input): bool
     {
         $this->isValid = !empty($input);
+
         return $this->isValid;
     }
 
-    /**
-     * @return null|string
-     */
     public function getErrorMessage(): string|null
     {
         return !$this->isValid ? 'Cannot be empty' : null;

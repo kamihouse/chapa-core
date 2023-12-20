@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Domain\Validators;
-
-use DateTime;
-use Exception;
+namespace Frete\Core\Domain\Validators;
 
 class OptionalDateValidator extends Validator
 {
@@ -15,32 +12,16 @@ class OptionalDateValidator extends Validator
     {
         if (null === $input) {
             $this->isValid = true;
+
             return $this->isValid;
         }
         $this->isValid = (new DateValidator())->validate($input);
+
         return $this->isValid;
     }
 
-    /**
-     * @return null|string
-     */
     public function getErrorMessage(): string|null
     {
         return !$this->isValid ? 'Invalid date format' : null;
-    }
-
-    private function isString(mixed $input): bool
-    {
-        return is_string($input);
-    }
-
-    private function isAValidDate($date)
-    {
-        try {
-            $date = new DateTime($date);
-            return true;
-        } catch (Exception $e) {
-            return false;
-        }
     }
 }

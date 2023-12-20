@@ -2,14 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\Distribuition;
+namespace Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\Distribuition;
 
-use Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration\KafkaMessagePublisherConfiguration;
-use Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\{KafkaBackedMessageChannelBuilder, KafkaOutboundChannelAdapterBuilder};
 use Ecotone\AnnotationFinder\AnnotationFinder;
-use Ecotone\Messaging\Attribute\ModuleAnnotation;
 use Ecotone\Messaging\Channel\SimpleMessageChannelBuilder;
-use Ecotone\Messaging\Config\Annotation\AnnotationModule;
 use Ecotone\Messaging\Config\Annotation\ModuleConfiguration\{ExtensionObjectResolver, NoExternalConfigurationModule};
 use Ecotone\Messaging\Config\{Configuration, ConfigurationException, ModuleReferenceSearchService, ServiceConfiguration};
 use Ecotone\Messaging\Handler\Gateway\GatewayProxyBuilder;
@@ -20,9 +16,10 @@ use Ecotone\Messaging\MessageHeaders;
 use Ecotone\Messaging\Support\Assert;
 use Ecotone\Modelling\Config\DistributedGatewayModule;
 use Ecotone\Modelling\{DistributedBus, DistributionEntrypoint};
+use Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration\KafkaMessagePublisherConfiguration;
+use Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\{KafkaBackedMessageChannelBuilder, KafkaOutboundChannelAdapterBuilder};
 
-#[ModuleAnnotation]
-class KafkaDistribuitionModule extends NoExternalConfigurationModule implements AnnotationModule
+class KafkaDistribuitionModule
 {
     // @phpstan-ignore-next-line
     private array $distributedEventHandlers;
@@ -44,11 +41,12 @@ class KafkaDistribuitionModule extends NoExternalConfigurationModule implements 
         );
     }
 
-    public function prepare(Configuration $configuration, array $extensionObjects, ModuleReferenceSearchService $moduleReferenceSearchService, InterfaceToCallRegistry $interfaceToCallRegistry): void
+    public function prepare(Configuration $configuration, array $extensionObjects): void
     {
         $registeredReferences = [];
         $applicationConfiguration = ExtensionObjectResolver::resolveUnique(ServiceConfiguration::class, $extensionObjects, ServiceConfiguration::createWithDefaults());
 
+        /** @var KafkaDistribuitedBusConfiguration $distributedBusConfiguration */
         foreach ($extensionObjects as $distributedBusConfiguration) {
             if (!$distributedBusConfiguration instanceof KafkaDistribuitedBusConfiguration) {
                 continue;
@@ -67,14 +65,14 @@ class KafkaDistribuitionModule extends NoExternalConfigurationModule implements 
 
             if ($distributedBusConfiguration->isConsumer()) {
                 Assert::isFalse(ServiceConfiguration::DEFAULT_SERVICE_NAME === $applicationConfiguration->getServiceName(), "Service name can't be default when using distribution. Set up correct Service Name");
-
-                $channelName = $applicationConfiguration->getServiceName();
+                $channelName = $distributedBusConfiguration->getQueueName();
+                $endpointId = null != $distributedBusConfiguration->getEndpointId() ? $distributedBusConfiguration->getEndpointId() : $applicationConfiguration->getServiceName();
                 $configuration->registerMessageChannel(KafkaBackedMessageChannelBuilder::create($channelName, $distributedBusConfiguration->getConnectionReference()));
                 $configuration->registerMessageHandler(
                     TransformerBuilder::createHeaderEnricher([
                         MessageHeaders::ROUTING_SLIP => DistributionEntrypoint::DISTRIBUTED_CHANNEL,
                     ])
-                        ->withEndpointId($applicationConfiguration->getServiceName())
+                        ->withEndpointId($endpointId)
                         ->withInputChannelName($channelName)
                 );
             }
@@ -88,15 +86,10 @@ class KafkaDistribuitionModule extends NoExternalConfigurationModule implements 
             || $extensionObject instanceof ServiceConfiguration;
     }
 
-    public function getModulePackageName(): string
-    {
-        return 'kafka';
-    }
-
     private function registerPublisher(KafkaDistribuitedBusConfiguration|KafkaMessagePublisherConfiguration $messagePublisher, ServiceConfiguration $applicationConfiguration, Configuration $configuration): void
     {
         $mediaType = $messagePublisher->getOutputDefaultConversionMediaType() ? $messagePublisher->getOutputDefaultConversionMediaType() : $applicationConfiguration->getDefaultSerializationMediaType();
-
+        $channelName = $messagePublisher->getQueueName();
         $configuration
             ->registerGatewayBuilder(
                 GatewayProxyBuilder::create($messagePublisher->getReferenceName(), DistributedBus::class, 'sendCommand', $messagePublisher->getReferenceName())
@@ -145,12 +138,13 @@ class KafkaDistribuitionModule extends NoExternalConfigurationModule implements 
                     )
             )
             ->registerMessageHandler(
-                KafkaOutboundChannelAdapterBuilder::create($messagePublisher->getQueueName(), $messagePublisher->getConnectionReference(), $messagePublisher->getmessageBrokerHeadersReferenceName(), $messagePublisher->getKafkaTopicConfiguration())
+                KafkaOutboundChannelAdapterBuilder::create($channelName, $messagePublisher->getConnectionReference(), $messagePublisher->getmessageBrokerHeadersReferenceName(), $messagePublisher->getKafkaTopicConfiguration())
                     ->withEndpointId($messagePublisher->getReferenceName() . '.handler')
                     ->withInputChannelName($messagePublisher->getReferenceName())
                     ->withAutoDeclareOnSend($messagePublisher->isAutoDeclareOnSend())
                     ->withHeaderMapper($messagePublisher->getHeaderMapper())
                     ->withDefaultConversionMediaType($mediaType)
+                    ->withStaticHeadersToEnrich([MessageHeaders::POLLED_CHANNEL_NAME => $channelName])
             )
             ->registerGatewayBuilder(
                 GatewayProxyBuilder::create($messagePublisher->getReferenceName(), DistributedBus::class, 'sendMessage', $messagePublisher->getReferenceName())
@@ -164,6 +158,7 @@ class KafkaDistribuitionModule extends NoExternalConfigurationModule implements 
                         ]
                     )
             )
-            ->registerMessageChannel(SimpleMessageChannelBuilder::createDirectMessageChannel($messagePublisher->getReferenceName()));
+            ->registerMessageChannel(SimpleMessageChannelBuilder::createDirectMessageChannel($messagePublisher->getReferenceName()))
+        ;
     }
 }

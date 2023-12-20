@@ -2,43 +2,8 @@
     "name": "chapa-php/core",
     "description": "core package for php projects opnative using ddd, cqrs, eda with laravel and ecotone framework",
     "type": "library",
-    "require": {
-        "laravel/framework": "^9.0|^10.0",
-        "ecotone/enqueue": "^1.82",
-        "ecotone/jms-converter": "^1.82",
-        "ecotone/lite-application": "^1.82",
-        "ecotone/redis": "^1.82",
-        "ecotone/sqs": "^1.82",
-        "enqueue/enqueue": "^0.10.18",
-        "enqueue/rdkafka": "^0.10.18",
-        "guzzlehttp/guzzle": "^7.7",
-        "ecotone/laravel": "^1.73"
-    },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.17",
-        "marcocesarato/php-conventional-changelog": "^1.17",
-        "mockery/mockery": "^1.5",
-        "phpstan/phpstan": "^1.10",
-        "phpunit/phpunit": "^10.1"
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Ecotone\\Laravel\\EcotoneProvider"
-            ]
-        }
-    },
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Chapa\\Core\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
+    "version": "0.10.1",
     "authors": [
         {
             "name": "Mateus Anjos",
@@ -51,11 +16,21 @@
         "sort-packages": true,
         "process-timeout": 0,
         "allow-plugins": {
-            "captainhook/plugin-composer": false
+            "captainhook/plugin-composer": true
         }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Frete\\Core\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "scripts": {
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -77,7 +52,28 @@
         "release": "conventional-changelog --commit",
         "release:patch": "conventional-changelog --patch --commit",
         "release:minor": "conventional-changelog --minor --commit",
-        "release:major": "conventional-changelog --major --commit"
+        "release:major": "conventional-changelog --major --commit",
+        "release:rc": "conventional-changelog --rc --commit"
     },
-    "version": "0.4.0"
+    "require-dev": {
+        "captainhook/captainhook": "^5.16",
+        "captainhook/plugin-composer": "^5.3",
+        "fakerphp/faker": "^1.23",
+        "friendsofphp/php-cs-fixer": "^3.18",
+        "marcocesarato/php-conventional-changelog": "^1.17",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^10.2",
+        "ramsey/conventional-commits": "^1.5"
+    },
+    "require": {
+        "ecotone/enqueue": "^1.88",
+        "ecotone/laravel": "^1.88",
+        "ecotone/redis": "^1.88",
+        "ecotone/jms-converter": "^1.82",
+        "ecotone/sqs": "^1.88",
+        "enqueue/enqueue": "^0.10.18",
+        "enqueue/rdkafka": "^0.10.18",
+        "guzzlehttp/guzzle": "^7.7",
+        "predis/predis": "^1.1"
+    }
 }

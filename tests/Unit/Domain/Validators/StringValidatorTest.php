@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\StringValidator;
+use Frete\Core\Domain\Validators\StringValidator;
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class StringValidatorTest extends TestCase
 {
     public function testShouldValidateString()

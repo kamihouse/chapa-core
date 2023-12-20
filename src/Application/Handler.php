@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Application;
+namespace Frete\Core\Application;
 
-use Chapa\Core\Shared\Result;
+use Frete\Core\Domain\Event;
+use Frete\Core\Shared\Result;
 
 interface Handler
 {
-    public function handle(Action $action): Result;
+    public function handle(Action|Event|IntegrationEvent $actionOrEvent): Result;
 }

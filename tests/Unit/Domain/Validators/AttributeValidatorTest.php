@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\{AttributeValidator, Validator};
+use Frete\Core\Domain\Validators\{AttributeValidator, Validator};
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class AttributeValidatorTest extends TestCase
 {
     public function testConstructor(): void

@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\PositiveNumberValidator;
+use Frete\Core\Domain\Validators\PositiveNumberValidator;
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class PositiveNumberValidatorTest extends TestCase
 {
     public function testShouldValidatePositive()

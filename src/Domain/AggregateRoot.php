@@ -2,37 +2,50 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Domain;
+namespace Frete\Core\Domain;
 
-abstract class AggregateRoot extends Entity
+abstract class AggregateRoot extends Entity implements EventFactory, EventStore
 {
-    private BaseArrayObject $domainEvents;
+    private \ArrayObject $eventsToCommit;
+    private \ArrayObject $eventsCommited;
 
     public function __construct(string $id)
     {
         parent::__construct($id);
-        $this->clearEvents();
+        $this->eventsToCommit = new \ArrayObject();
+        $this->eventsCommited = new \ArrayObject();
     }
 
-    public function clearEvents(): void
+    public function addEvent(Event $event): void
     {
-        $this->domainEvents = new BaseArrayObject();
+        $this->eventsToCommit->offsetSet($this->generateKeyOffset($event), $event);
     }
 
     public function getEvents(): array
     {
-        return $this->domainEvents->getArrayCopy();
+        return $this->eventsToCommit->getArrayCopy();
     }
 
-    protected function addEvent(DomainEvent $event)
+    private function generateKeyOffset(Event $event): string
     {
-        $this->domainEvents->append($event);
+        return md5(serialize($event));
     }
 
-    protected function createEvent(string $domainEventReferenceName, array $data = []): void
+    public function commitEvent(Event $event): void
     {
-        $params = [$this->id, $data];
-        $evento = new ($domainEventReferenceName)(...$params);
-        $this->addEvent($evento);
+        $key = $this->generateKeyOffset($event);
+        $event = $this->eventsToCommit->offsetGet($key);
+        if ($event) {
+            $this->eventsCommited->offsetSet($key, $event);
+            $this->eventsToCommit->offsetUnset($key);
+        }
+    }
+
+    public function createEvent(string $eventName, array $data): Event
+    {
+        $event = new $eventName($this->id, $data);
+        $this->addEvent($event);
+
+        return $event;
     }
 }

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration;
+namespace Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration;
 
-use Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\KafkaInboundChannelAdapterBuilder;
 use Ecotone\AnnotationFinder\AnnotationFinder;
 use Ecotone\Messaging\Attribute\ModuleAnnotation;
 use Ecotone\Messaging\Config\Annotation\AnnotationModule;
 use Ecotone\Messaging\Config\Annotation\ModuleConfiguration\NoExternalConfigurationModule;
 use Ecotone\Messaging\Config\{Configuration, ModuleReferenceSearchService};
 use Ecotone\Messaging\Handler\InterfaceToCallRegistry;
+use Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\KafkaInboundChannelAdapterBuilder;
 
 #[ModuleAnnotation]
 final class KafkaMessageConsumerModule extends NoExternalConfigurationModule implements AnnotationModule
@@ -29,7 +29,8 @@ final class KafkaMessageConsumerModule extends NoExternalConfigurationModule imp
                     $extensionObject->getEndpointId(),
                     $extensionObject->getQueueName(),
                     $extensionObject->getEndpointId(),
-                    $extensionObject->getConnectionReferenceName()
+                    $extensionObject->getConnectionReferenceName(),
+                    $extensionObject->getKafkaTopicConfiguration()
                 )
                     ->withDeclareOnStartup($extensionObject->isDeclaredOnStartup())
                     ->withHeaderMapper($extensionObject->getHeaderMapper())

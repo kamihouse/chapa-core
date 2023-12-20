@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\NotNullValidator;
+use Frete\Core\Domain\Validators\NotNullValidator;
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class NotNullValidatorTest extends TestCase
 {
     private NotNullValidator $validator;

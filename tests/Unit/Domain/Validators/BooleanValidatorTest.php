@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\BooleanValidator;
+use Frete\Core\Domain\Validators\BooleanValidator;
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class BooleanValidatorTest extends TestCase
 {
     public function testShouldValidateBoolean()

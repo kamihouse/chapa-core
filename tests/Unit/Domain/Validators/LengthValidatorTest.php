@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\LengthValidator;
+use Frete\Core\Domain\Validators\LengthValidator;
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class LengthValidatorTest extends TestCase
 {
     public function testShouldValidateLength()
@@ -26,6 +29,13 @@ class LengthValidatorTest extends TestCase
     {
         $validator = new LengthValidator(5, 10);
         $this->assertFalse($validator->validate('1234'));
+        $this->assertEquals('Invalid length', $validator->getErrorMessage());
+    }
+
+    public function testShouldNotValidateLengthIsNull()
+    {
+        $validator = new LengthValidator(5, 10);
+        $this->assertFalse($validator->validate(null));
         $this->assertEquals('Invalid length', $validator->getErrorMessage());
     }
 }

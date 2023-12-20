@@ -2,19 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka;
+namespace Frete\Core\Infrastructure\Ecotone\Brokers\Kafka;
 
-use Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration\KafkaTopicConfiguration;
-use Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\Connection\KafkaConnectionFactory;
-use Chapa\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\DefaultMessageHeader;
 use Ecotone\Enqueue\{CachedConnectionFactory, EnqueueOutboundChannelAdapterBuilder, HttpReconnectableConnectionFactory, OutboundMessageConverter};
 use Ecotone\Messaging\Conversion\ConversionService;
 use Ecotone\Messaging\Handler\{ChannelResolver, ReferenceSearchService};
 use Ecotone\Messaging\MessageConverter\DefaultHeaderMapper;
 use Enqueue\RdKafka\{RdKafkaConnectionFactory, RdKafkaTopic};
+use Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration\KafkaTopicConfiguration;
+use Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\Connection\KafkaConnectionFactory;
+use Frete\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\DefaultMessageHeader;
 
 class KafkaOutboundChannelAdapterBuilder extends EnqueueOutboundChannelAdapterBuilder
 {
+    private array $staticHeadersToAdd = [];
+
     private function __construct(private string $topicName, private string $connectionFactoryReferenceName, private string $messageBrokerHeadersReferenceName, private ?KafkaTopicConfiguration $topicConfig)
     {
         $this->initialize($connectionFactoryReferenceName);
@@ -29,21 +31,30 @@ class KafkaOutboundChannelAdapterBuilder extends EnqueueOutboundChannelAdapterBu
     {
         /** @var KafkaConnectionFactory $connectionFactory */
         $connectionFactory = $referenceSearchService->get($this->connectionFactoryReferenceName);
+
         /** @var ConversionService $conversionService */
         $conversionService = $referenceSearchService->get(ConversionService::REFERENCE_NAME);
 
         // call the headers HERE!
         $messageBrokerHeadersReferenceName = new ($this->messageBrokerHeadersReferenceName)();
 
-        $this->topicConfig = $this->topicConfig ?? new KafkaTopicConfiguration();
+        $this->topicConfig ??= new KafkaTopicConfiguration();
         $headerMapper = DefaultHeaderMapper::createWith([], $this->headerMapper, $conversionService);
+
         return new KafkaOutboundChannelAdapter(
             CachedConnectionFactory::createFor(new HttpReconnectableConnectionFactory($connectionFactory)),
             $this->buildKafkaTopic($this->topicName, $this->topicConfig),
             $this->autoDeclare,
-            new OutboundMessageConverter($headerMapper, $conversionService, $this->defaultConversionMediaType, $this->defaultDeliveryDelay, $this->defaultTimeToLive, $this->defaultPriority, []),
+            new OutboundMessageConverter($headerMapper, $conversionService, $this->defaultConversionMediaType, $this->defaultDeliveryDelay, $this->defaultTimeToLive, $this->defaultPriority, $this->staticHeadersToAdd),
             $messageBrokerHeadersReferenceName
         );
+    }
+
+    public function withStaticHeadersToEnrich(array $headers): self
+    {
+        $this->staticHeadersToAdd = $headers;
+
+        return $this;
     }
 
     private function buildKafkaTopic(string $topicName, KafkaTopicConfiguration $topicConfig): RdKafkaTopic

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Infrastructure\Ecotone\Brokers;
+namespace Frete\Core\Infrastructure\Ecotone\Brokers;
 
-use Chapa\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\IHeaderMessage;
 use Ecotone\Enqueue\OutboundMessage;
 use Ecotone\Enqueue\{CachedConnectionFactory, OutboundMessageConverter};
 use Ecotone\Messaging\{Message, MessageHandler, MessageHeaders};
+use Frete\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\IHeaderMessage;
 use Interop\Queue\{Destination, Message as buildMessageReturn};
 
 abstract class CustomEnqueueOutboundChannelAdapter implements MessageHandler
@@ -21,7 +21,8 @@ abstract class CustomEnqueueOutboundChannelAdapter implements MessageHandler
         protected bool $autoDeclare,
         protected OutboundMessageConverter $outboundMessageConverter,
         private IHeaderMessage $messageBrokerHeaders
-    ) {}
+    ) {
+    }
 
     abstract public function initialize(): void;
 
@@ -33,9 +34,10 @@ abstract class CustomEnqueueOutboundChannelAdapter implements MessageHandler
         }
         $messageToSend = $this->buildMessage($message);
         $this->connectionFactory->getProducer()
-            ->setTimeToLive($this->outboundMessage->getTimeToLive())
-            ->setDeliveryDelay($this->outboundMessage->getDeliveryDelay())
-            ->send($this->destination, $messageToSend);
+        ->setTimeToLive($this->outboundMessage->getTimeToLive())
+        ->setDeliveryDelay($this->outboundMessage->getDeliveryDelay())
+        ->send($this->destination, $messageToSend)
+        ;
     }
 
     protected function buildMessage(Message $message): buildMessageReturn
@@ -44,7 +46,13 @@ abstract class CustomEnqueueOutboundChannelAdapter implements MessageHandler
         $headers = $outboundMessage->getHeaders();
         $headers[MessageHeaders::CONTENT_TYPE] = $outboundMessage->getContentType();
 
-        $messageBrokerHeaders = $this->messageBrokerHeaders->getSchema() ? $this->messageBrokerHeaders->getSchema() : [];
+        if (is_subclass_of($message->getPayload(), \Frete\Core\Domain\Event::class)) {
+            $this->messageBrokerHeaders->enrichHeaderByMessagePayload($message->getPayload());
+        }
+
+        $this->messageBrokerHeaders->enrichHeadersByArray($headers);
+
+        $messageBrokerHeaders = $this->messageBrokerHeaders->getSchema();
 
         return $this->connectionFactory->createContext()->createMessage($outboundMessage->getPayload(), $headers, $messageBrokerHeaders);
     }

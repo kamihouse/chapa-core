@@ -2,20 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Application\Errors;
+namespace Frete\Core\Application\Errors;
 
-use ArrayObject;
-
-class ApplicationError
+class ApplicationError extends \Exception
 {
-    public function __construct(private readonly ArrayObject $errors, private readonly ?string $domainName = null) {}
-
-    public function getErrors(): ArrayObject
-    {
-        if ($this->domainName) {
-            return new ArrayObject([$this->domainName => (array) $this->errors]);
-        }
-
-        return $this->errors;
+    public function __construct(
+        string $message,
+        int $code = 2,
+        ?\Throwable $previous = null,
+    ) {
+        parent::__construct($message, $code, $previous);
     }
 }

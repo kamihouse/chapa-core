@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Domain;
+namespace Frete\Core\Domain;
 
 class Money
 {
-    public function __construct(private float $amount) {}
+    public function __construct(private float $amount)
+    {
+    }
 
     /**
      * Get the value of amount.
@@ -18,8 +20,6 @@ class Money
 
     /**
      * Set the value of amount.
-     *
-     * @param float $amount
      */
     public function setAmount(float $amount): self
     {

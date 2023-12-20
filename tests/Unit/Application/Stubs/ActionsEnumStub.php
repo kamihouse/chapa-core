@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Application\Stubs;
 
-use Chapa\Core\Application\Command;
+use Frete\Core\Application\Command;
 
-class ActionStub implements Command {}
+class ActionStub extends Command
+{
+}
 
 enum ActionsEnumStub: string
 {

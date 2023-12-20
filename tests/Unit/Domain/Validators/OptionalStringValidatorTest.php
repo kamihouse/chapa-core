@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\OptionalStringValidator;
+use Frete\Core\Domain\Validators\OptionalStringValidator;
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class OptionalStringValidatorTest extends TestCase
 {
     public function testShouldValidateString()

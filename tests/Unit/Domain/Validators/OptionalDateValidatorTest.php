@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\OptionalDateValidator;
+use Frete\Core\Domain\Validators\OptionalDateValidator;
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class OptionalDateValidatorTest extends TestCase
 {
     public function testShouldValidateDate()

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Integration\Domain\Validators;
 
-use ArrayObject;
-use Chapa\Core\Domain\Validators\{AttributeValidator, FloatValidator, NotNullValidator, OneOfOptionsValidator, StringValidator};
-use Chapa\Core\Domain\Validators\{ValidatorCollectionDecorator, ValidatorComposite};
-use stdClass;
+use Frete\Core\Domain\Validators\{AttributeValidator, FloatValidator, NotNullValidator, OneOfOptionsValidator, StringValidator};
+use Frete\Core\Domain\Validators\{ValidatorCollectionDecorator, ValidatorComposite};
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 final class AttributeValidatorTest extends TestCase
 {
     private AttributeValidator $sut;
@@ -21,14 +22,14 @@ final class AttributeValidatorTest extends TestCase
                 'attributeOne' => 'string',
                 'attributeTwo' => 1.1,
                 'attributeThree' => 'option1',
-            ]
+            ],
         ];
 
         $expected = [
             'isValid' => true,
             'errorMessage' => [
-                'attributeRoot' => []
-            ]
+                'attributeRoot' => [],
+            ],
         ];
 
         $notNullValidator = new NotNullValidator();
@@ -36,25 +37,25 @@ final class AttributeValidatorTest extends TestCase
         $floatValidator = new FloatValidator();
         $oneOfOptionsValidator = new OneOfOptionsValidator(['option1', 'option2']);
 
-        $notNullStringCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $stringValidator]));
-        $notNullFloatCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $floatValidator]));
-        $notNullOneOfOptionsCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $oneOfOptionsValidator]));
+        $notNullStringCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $stringValidator]));
+        $notNullFloatCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $floatValidator]));
+        $notNullOneOfOptionsCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $oneOfOptionsValidator]));
 
         $attributeOneValidator = new AttributeValidator('attributeOne', $notNullStringCompositeValidator);
         $attributeTwoValidator = new AttributeValidator('attributeTwo', $notNullFloatCompositeValidator);
         $attributeThreeValidator = new AttributeValidator('attributeThree', $notNullOneOfOptionsCompositeValidator);
 
-        $attributeRootValidator = new ValidatorComposite(new ArrayObject([
+        $attributeRootValidator = new ValidatorComposite(new \ArrayObject([
             $attributeOneValidator,
             $attributeTwoValidator,
-            $attributeThreeValidator
+            $attributeThreeValidator,
         ]));
 
         $this->sut = new AttributeValidator('attributeRoot', $attributeRootValidator);
 
         $actual = [
             'isValid' => $this->sut->validate($input),
-            'errorMessage' => $this->sut->getErrorMessage()
+            'errorMessage' => $this->sut->getErrorMessage(),
         ];
 
         $this->assertEquals($expected, $actual);
@@ -62,8 +63,8 @@ final class AttributeValidatorTest extends TestCase
 
     public function testValidateSingleWhenObject(): void
     {
-        $input = new stdClass();
-        $input->attributeRoot = new stdClass();
+        $input = new \stdClass();
+        $input->attributeRoot = new \stdClass();
         $input->attributeRoot->attributeOne = 'string';
         $input->attributeRoot->attributeTwo = 1.1;
         $input->attributeRoot->attributeThree = 'option1';
@@ -71,8 +72,8 @@ final class AttributeValidatorTest extends TestCase
         $expected = [
             'isValid' => true,
             'errorMessage' => [
-                'attributeRoot' => []
-            ]
+                'attributeRoot' => [],
+            ],
         ];
 
         $notNullValidator = new NotNullValidator();
@@ -80,25 +81,25 @@ final class AttributeValidatorTest extends TestCase
         $floatValidator = new FloatValidator();
         $oneOfOptionsValidator = new OneOfOptionsValidator(['option1', 'option2']);
 
-        $notNullStringCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $stringValidator]));
-        $notNullFloatCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $floatValidator]));
-        $notNullOneOfOptionsCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $oneOfOptionsValidator]));
+        $notNullStringCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $stringValidator]));
+        $notNullFloatCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $floatValidator]));
+        $notNullOneOfOptionsCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $oneOfOptionsValidator]));
 
         $attributeOneValidator = new AttributeValidator('attributeOne', $notNullStringCompositeValidator);
         $attributeTwoValidator = new AttributeValidator('attributeTwo', $notNullFloatCompositeValidator);
         $attributeThreeValidator = new AttributeValidator('attributeThree', $notNullOneOfOptionsCompositeValidator);
 
-        $attributeRootValidator = new ValidatorComposite(new ArrayObject([
+        $attributeRootValidator = new ValidatorComposite(new \ArrayObject([
             $attributeOneValidator,
             $attributeTwoValidator,
-            $attributeThreeValidator
+            $attributeThreeValidator,
         ]));
 
         $this->sut = new AttributeValidator('attributeRoot', $attributeRootValidator);
 
         $actual = [
             'isValid' => $this->sut->validate($input),
-            'errorMessage' => $this->sut->getErrorMessage()
+            'errorMessage' => $this->sut->getErrorMessage(),
         ];
 
         $this->assertEquals($expected, $actual);
@@ -117,8 +118,8 @@ final class AttributeValidatorTest extends TestCase
                     'attributeOne' => 'string',
                     'attributeTwo' => 1.1,
                     'attributeThree' => 'option1',
-                ]
-            ]
+                ],
+            ],
         ];
 
         $expected = [
@@ -128,11 +129,11 @@ final class AttributeValidatorTest extends TestCase
                     0 => [
                         'attributeOne' => [
                             0 => 'Cannot be null',
-                            1 => 'Invalid string'
-                        ]
-                    ]
-                ]
-            ]
+                            1 => 'Invalid string',
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $notNullValidator = new NotNullValidator();
@@ -140,18 +141,18 @@ final class AttributeValidatorTest extends TestCase
         $floatValidator = new FloatValidator();
         $oneOfOptionsValidator = new OneOfOptionsValidator(['option1', 'option2']);
 
-        $notNullStringCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $stringValidator]));
-        $notNullFloatCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $floatValidator]));
-        $notNullOneOfOptionsCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $oneOfOptionsValidator]));
+        $notNullStringCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $stringValidator]));
+        $notNullFloatCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $floatValidator]));
+        $notNullOneOfOptionsCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $oneOfOptionsValidator]));
 
         $attributeOneValidator = new AttributeValidator('attributeOne', $notNullStringCompositeValidator);
         $attributeTwoValidator = new AttributeValidator('attributeTwo', $notNullFloatCompositeValidator);
         $attributeThreeValidator = new AttributeValidator('attributeThree', $notNullOneOfOptionsCompositeValidator);
 
-        $attributeRootValidator = new ValidatorComposite(new ArrayObject([
+        $attributeRootValidator = new ValidatorComposite(new \ArrayObject([
             $attributeOneValidator,
             $attributeTwoValidator,
-            $attributeThreeValidator
+            $attributeThreeValidator,
         ]));
 
         $attributeRootValidatorCollection = new ValidatorCollectionDecorator($attributeRootValidator);
@@ -160,7 +161,7 @@ final class AttributeValidatorTest extends TestCase
 
         $actual = [
             'isValid' => $this->sut->validate($input),
-            'errorMessage' => $this->sut->getErrorMessage()
+            'errorMessage' => $this->sut->getErrorMessage(),
         ];
 
         $this->assertEquals($expected, $actual);
@@ -168,17 +169,17 @@ final class AttributeValidatorTest extends TestCase
 
     public function testValidateCollectionWhenObject(): void
     {
-        $firstClass = new stdClass();
+        $firstClass = new \stdClass();
         $firstClass->attributeOne = null;
         $firstClass->attributeTwo = 1.1;
         $firstClass->attributeThree = 'option1';
 
-        $secondClass = new stdClass();
+        $secondClass = new \stdClass();
         $secondClass->attributeOne = null;
         $secondClass->attributeTwo = 1.1;
         $secondClass->attributeThree = 'option1';
 
-        $input = new stdClass();
+        $input = new \stdClass();
         $input->attributeRoot = [$firstClass, $secondClass];
 
         $expected = [
@@ -188,17 +189,17 @@ final class AttributeValidatorTest extends TestCase
                     0 => [
                         'attributeOne' => [
                             0 => 'Cannot be null',
-                            1 => 'Invalid string'
-                        ]
+                            1 => 'Invalid string',
+                        ],
                     ],
                     1 => [
                         'attributeOne' => [
                             0 => 'Cannot be null',
-                            1 => 'Invalid string'
-                        ]
-                    ]
-                ]
-            ]
+                            1 => 'Invalid string',
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $notNullValidator = new NotNullValidator();
@@ -206,18 +207,18 @@ final class AttributeValidatorTest extends TestCase
         $floatValidator = new FloatValidator();
         $oneOfOptionsValidator = new OneOfOptionsValidator(['option1', 'option2']);
 
-        $notNullStringCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $stringValidator]));
-        $notNullFloatCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $floatValidator]));
-        $notNullOneOfOptionsCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $oneOfOptionsValidator]));
+        $notNullStringCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $stringValidator]));
+        $notNullFloatCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $floatValidator]));
+        $notNullOneOfOptionsCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $oneOfOptionsValidator]));
 
         $attributeOneValidator = new AttributeValidator('attributeOne', $notNullStringCompositeValidator);
         $attributeTwoValidator = new AttributeValidator('attributeTwo', $notNullFloatCompositeValidator);
         $attributeThreeValidator = new AttributeValidator('attributeThree', $notNullOneOfOptionsCompositeValidator);
 
-        $attributeRootValidator = new ValidatorComposite(new ArrayObject([
+        $attributeRootValidator = new ValidatorComposite(new \ArrayObject([
             $attributeOneValidator,
             $attributeTwoValidator,
-            $attributeThreeValidator
+            $attributeThreeValidator,
         ]));
 
         $attributeRootValidatorCollection = new ValidatorCollectionDecorator($attributeRootValidator);
@@ -226,7 +227,7 @@ final class AttributeValidatorTest extends TestCase
 
         $actual = [
             'isValid' => $this->sut->validate($input),
-            'errorMessage' => $this->sut->getErrorMessage()
+            'errorMessage' => $this->sut->getErrorMessage(),
         ];
 
         $this->assertEquals($expected, $actual);
@@ -245,8 +246,8 @@ final class AttributeValidatorTest extends TestCase
                     'attributeOne' => [null, null],
                     'attributeTwo' => [1.1, 1.1],
                     'attributeThree' => ['option1', 'option1'],
-                ]
-            ]
+                ],
+            ],
         ];
 
         $expected = [
@@ -257,28 +258,28 @@ final class AttributeValidatorTest extends TestCase
                         'attributeOne' => [
                             0 => [
                                 0 => 'Cannot be null',
-                                1 => 'Invalid string'
+                                1 => 'Invalid string',
                             ],
                             1 => [
                                 0 => 'Cannot be null',
-                                1 => 'Invalid string'
-                            ]
-                        ]
+                                1 => 'Invalid string',
+                            ],
+                        ],
                     ],
                     1 => [
                         'attributeOne' => [
                             0 => [
                                 0 => 'Cannot be null',
-                                1 => 'Invalid string'
+                                1 => 'Invalid string',
                             ],
                             1 => [
                                 0 => 'Cannot be null',
-                                1 => 'Invalid string'
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                1 => 'Invalid string',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $notNullValidator = new NotNullValidator();
@@ -286,21 +287,21 @@ final class AttributeValidatorTest extends TestCase
         $floatValidator = new FloatValidator();
         $oneOfOptionsValidator = new OneOfOptionsValidator(['option1', 'option2']);
 
-        $notNullStringCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $stringValidator]));
+        $notNullStringCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $stringValidator]));
         $notNullStringCompositeValidatorCollection = new ValidatorCollectionDecorator($notNullStringCompositeValidator);
-        $notNullFloatCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $floatValidator]));
+        $notNullFloatCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $floatValidator]));
         $notNullFloatCompositeValidatorCollection = new ValidatorCollectionDecorator($notNullFloatCompositeValidator);
-        $notNullOneOfOptionsCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $oneOfOptionsValidator]));
+        $notNullOneOfOptionsCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $oneOfOptionsValidator]));
         $notNullOneOfOptionsCompositeValidatorCollection = new ValidatorCollectionDecorator($notNullOneOfOptionsCompositeValidator);
 
         $attributeOneValidator = new AttributeValidator('attributeOne', $notNullStringCompositeValidatorCollection);
         $attributeTwoValidator = new AttributeValidator('attributeTwo', $notNullFloatCompositeValidatorCollection);
         $attributeThreeValidator = new AttributeValidator('attributeThree', $notNullOneOfOptionsCompositeValidatorCollection);
 
-        $attributeRootValidator = new ValidatorComposite(new ArrayObject([
+        $attributeRootValidator = new ValidatorComposite(new \ArrayObject([
             $attributeOneValidator,
             $attributeTwoValidator,
-            $attributeThreeValidator
+            $attributeThreeValidator,
         ]));
 
         $attributeRootValidatorCollection = new ValidatorCollectionDecorator($attributeRootValidator);
@@ -309,7 +310,7 @@ final class AttributeValidatorTest extends TestCase
 
         $actual = [
             'isValid' => $this->sut->validate($input),
-            'errorMessage' => $this->sut->getErrorMessage()
+            'errorMessage' => $this->sut->getErrorMessage(),
         ];
 
         $this->assertEquals($expected, $actual);
@@ -317,17 +318,17 @@ final class AttributeValidatorTest extends TestCase
 
     public function testValidateCollectionNestedWhenObject(): void
     {
-        $firstClass = new stdClass();
+        $firstClass = new \stdClass();
         $firstClass->attributeOne = [null, null];
         $firstClass->attributeTwo = [1.1, 1.1];
         $firstClass->attributeThree = ['option1', 'option1'];
 
-        $secondClass = new stdClass();
+        $secondClass = new \stdClass();
         $secondClass->attributeOne = [null, null];
         $secondClass->attributeTwo = [1.1, 1.1];
         $secondClass->attributeThree = ['option1', 'option1'];
 
-        $input = new stdClass();
+        $input = new \stdClass();
         $input->attributeRoot = [$firstClass, $secondClass];
 
         $expected = [
@@ -338,28 +339,28 @@ final class AttributeValidatorTest extends TestCase
                         'attributeOne' => [
                             0 => [
                                 0 => 'Cannot be null',
-                                1 => 'Invalid string'
+                                1 => 'Invalid string',
                             ],
                             1 => [
                                 0 => 'Cannot be null',
-                                1 => 'Invalid string'
-                            ]
-                        ]
+                                1 => 'Invalid string',
+                            ],
+                        ],
                     ],
                     1 => [
                         'attributeOne' => [
                             0 => [
                                 0 => 'Cannot be null',
-                                1 => 'Invalid string'
+                                1 => 'Invalid string',
                             ],
                             1 => [
                                 0 => 'Cannot be null',
-                                1 => 'Invalid string'
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                1 => 'Invalid string',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $notNullValidator = new NotNullValidator();
@@ -367,21 +368,21 @@ final class AttributeValidatorTest extends TestCase
         $floatValidator = new FloatValidator();
         $oneOfOptionsValidator = new OneOfOptionsValidator(['option1', 'option2']);
 
-        $notNullStringCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $stringValidator]));
+        $notNullStringCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $stringValidator]));
         $notNullStringCompositeValidatorCollection = new ValidatorCollectionDecorator($notNullStringCompositeValidator);
-        $notNullFloatCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $floatValidator]));
+        $notNullFloatCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $floatValidator]));
         $notNullFloatCompositeValidatorCollection = new ValidatorCollectionDecorator($notNullFloatCompositeValidator);
-        $notNullOneOfOptionsCompositeValidator = new ValidatorComposite(new ArrayObject([$notNullValidator, $oneOfOptionsValidator]));
+        $notNullOneOfOptionsCompositeValidator = new ValidatorComposite(new \ArrayObject([$notNullValidator, $oneOfOptionsValidator]));
         $notNullOneOfOptionsCompositeValidatorCollection = new ValidatorCollectionDecorator($notNullOneOfOptionsCompositeValidator);
 
         $attributeOneValidator = new AttributeValidator('attributeOne', $notNullStringCompositeValidatorCollection);
         $attributeTwoValidator = new AttributeValidator('attributeTwo', $notNullFloatCompositeValidatorCollection);
         $attributeThreeValidator = new AttributeValidator('attributeThree', $notNullOneOfOptionsCompositeValidatorCollection);
 
-        $attributeRootValidator = new ValidatorComposite(new ArrayObject([
+        $attributeRootValidator = new ValidatorComposite(new \ArrayObject([
             $attributeOneValidator,
             $attributeTwoValidator,
-            $attributeThreeValidator
+            $attributeThreeValidator,
         ]));
 
         $attributeRootValidatorCollection = new ValidatorCollectionDecorator($attributeRootValidator);
@@ -390,7 +391,7 @@ final class AttributeValidatorTest extends TestCase
 
         $actual = [
             'isValid' => $this->sut->validate($input),
-            'errorMessage' => $this->sut->getErrorMessage()
+            'errorMessage' => $this->sut->getErrorMessage(),
         ];
 
         $this->assertEquals($expected, $actual);

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration;
+namespace Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration;
 
 final class KafkaTopicConfiguration
 {
@@ -18,6 +18,7 @@ final class KafkaTopicConfiguration
     public function setpublisherPartition(int $publisherPartition): self
     {
         $this->publisherPartition = $publisherPartition;
+
         return $this;
     }
 
@@ -29,6 +30,7 @@ final class KafkaTopicConfiguration
     public function setpublisherKey(string $publisherKey): self
     {
         $this->publisherKey = $publisherKey;
+
         return $this;
     }
 
@@ -40,6 +42,7 @@ final class KafkaTopicConfiguration
     public function setConsumerPartitions(array $consumerPartitions): self
     {
         $this->consumerPartitions = $consumerPartitions;
+
         return $this;
     }
 }

@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\OptionalEmailValidator;
+use Frete\Core\Domain\Validators\OptionalEmailValidator;
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class OptionalEmailValidatorTest extends TestCase
 {
     public function testShouldValidateEmail()

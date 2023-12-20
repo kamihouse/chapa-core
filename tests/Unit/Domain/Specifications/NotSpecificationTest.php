@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Specifications;
 
-use Chapa\Core\Domain\Specifications\{NotSpecification, Specification};
+use Frete\Core\Domain\Specifications\{NotSpecification, Specification};
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class NotSpecificationTest extends TestCase
 {
     public function testIsSatisfiedBy(): void

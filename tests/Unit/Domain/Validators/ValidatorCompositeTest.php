@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\ValidatorCollectionDecorator;
-use Chapa\Core\Domain\Validators\{Validator, ValidatorComposite};
+use Frete\Core\Domain\Validators\ValidatorCollectionDecorator;
+use Frete\Core\Domain\Validators\{Validator, ValidatorComposite};
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class ValidatorCompositeTest extends TestCase
 {
     public function testAddValidator()
@@ -50,7 +53,7 @@ class ValidatorCompositeTest extends TestCase
                 0 => 'error',
                 1 => 'error',
                 2 => 'error',
-            ]
+            ],
         ];
 
         $validatorCollectionDecorator = new ValidatorCollectionDecorator($validator);
@@ -59,7 +62,7 @@ class ValidatorCompositeTest extends TestCase
 
         $actual = [
             'isValid' => $validatorComposite->validate($input),
-            'errorMessage' => $validatorComposite->getErrorMessage()
+            'errorMessage' => $validatorComposite->getErrorMessage(),
         ];
 
         $this->assertEquals($expected, $actual);

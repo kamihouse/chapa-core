@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka;
+namespace Frete\Core\Infrastructure\Ecotone\Brokers\Kafka;
 
-use Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration\KafkaTopicConfiguration;
-use Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\Connection\KafkaConnectionFactory;
 use Ecotone\Enqueue\{EnqueueInboundChannelAdapterBuilder, InboundMessageConverter};
 use Ecotone\Messaging\Conversion\ConversionService;
 use Ecotone\Messaging\Endpoint\PollingMetadata;
 use Ecotone\Messaging\Handler\{ChannelResolver, ReferenceSearchService};
 use Ecotone\Messaging\MessageConverter\DefaultHeaderMapper;
+use Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration\KafkaTopicConfiguration;
+use Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\Connection\KafkaConnectionFactory;
 
 final class KafkaInboundChannelAdapterBuilder extends EnqueueInboundChannelAdapterBuilder
 {
@@ -33,6 +33,7 @@ final class KafkaInboundChannelAdapterBuilder extends EnqueueInboundChannelAdapt
     {
         /** @var KafkaConnectionFactory $connectionFactory */
         $connectionFactory = $referenceSearchService->get($this->connectionReferenceName);
+
         /** @var ConversionService $conversionService */
         $conversionService = $referenceSearchService->get(ConversionService::REFERENCE_NAME);
 

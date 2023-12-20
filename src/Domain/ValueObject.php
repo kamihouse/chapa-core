@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Domain;
+namespace Frete\Core\Domain;
 
 interface ValueObject
 {

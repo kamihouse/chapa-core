@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Infrastructure\Ecotone\Brokers\Sqs;
+namespace Frete\Core\Infrastructure\Ecotone\Brokers\Sqs;
 
-use Chapa\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\DefaultMessageHeader;
 use Ecotone\Enqueue\EnqueueMessageChannelBuilder;
 use Ecotone\Sqs\SqsInboundChannelAdapterBuilder;
 use Enqueue\Sqs\SqsConnectionFactory;
+use Frete\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\DefaultMessageHeader;
 
 final class CustomSqsBackedMessageChannelBuilder extends EnqueueMessageChannelBuilder
 {

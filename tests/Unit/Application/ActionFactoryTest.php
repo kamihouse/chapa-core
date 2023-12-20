@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Application;
 
-use Chapa\Core\Application\Action;
-use Chapa\Core\Application\{ActionFactory, IActionFactory};
-use Exception;
+use Frete\Core\Application\Action;
+use Frete\Core\Application\{ActionFactory, IActionFactory};
 use Tests\TestCase;
 use Tests\Unit\Application\Stubs\{ActionStub, ActionsEnumStub};
 
+/**
+ * @internal
+ */
 class ActionFactoryTest extends TestCase
 {
     protected ActionFactory $sut;
@@ -23,13 +25,13 @@ class ActionFactoryTest extends TestCase
 
     public function testConstructorSuccessWithCorrectlyData()
     {
-        $this->assertInstanceOf(IActionFactory::class, $this->sut);
+        $this->assertInstanceOf(ActionFactory::class, $this->sut);
     }
 
     public function testConstructorErrorWithIncorrectlyData()
     {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('an enum instance is expected for the action record.');
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('an enum instance is expected.');
         new ActionFactory(stdClass::class);
     }
 
@@ -48,7 +50,7 @@ class ActionFactoryTest extends TestCase
 
     public function testCreateActionErrorWithNotExistsAction()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $this->expectExceptionMessage('there is no NOT stubed action on the enum');
         $this->sut = $this->createSut();
         $this->sut->create('NOT stubed');

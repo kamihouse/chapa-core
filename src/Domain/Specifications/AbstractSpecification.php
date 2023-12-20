@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Domain\Specifications;
+namespace Frete\Core\Domain\Specifications;
 
 abstract class AbstractSpecification implements Specification
 {

@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Validators;
 
-use Chapa\Core\Domain\Validators\GreaterThanValidator;
+use Frete\Core\Domain\Validators\GreaterThanValidator;
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class GreaterThanValidatorTest extends TestCase
 {
     public function testValidateReturnsTrueForValidInput()

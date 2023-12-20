@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Domain\Validators;
+namespace Frete\Core\Domain\Validators;
 
 abstract class Validator
 {

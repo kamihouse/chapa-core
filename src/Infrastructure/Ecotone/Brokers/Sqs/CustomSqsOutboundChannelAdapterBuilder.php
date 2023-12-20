@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Infrastructure\Ecotone\Brokers\Sqs;
+namespace Frete\Core\Infrastructure\Ecotone\Brokers\Sqs;
 
-use Chapa\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\DefaultMessageHeader;
 use Ecotone\Enqueue\{CachedConnectionFactory, EnqueueOutboundChannelAdapterBuilder, HttpReconnectableConnectionFactory, OutboundMessageConverter};
 use Ecotone\Messaging\Conversion\ConversionService;
 use Ecotone\Messaging\Handler\{ChannelResolver, ReferenceSearchService};
 use Ecotone\Messaging\MessageConverter\DefaultHeaderMapper;
 use Enqueue\Sqs\SqsConnectionFactory;
+use Frete\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\DefaultMessageHeader;
 
 class CustomSqsOutboundChannelAdapterBuilder extends EnqueueOutboundChannelAdapterBuilder
 {
@@ -27,6 +27,7 @@ class CustomSqsOutboundChannelAdapterBuilder extends EnqueueOutboundChannelAdapt
     {
         /** @var SqsConnectionFactory $connectionFactory */
         $connectionFactory = $referenceSearchService->get($this->connectionFactoryReferenceName);
+
         /** @var ConversionService $conversionService */
         $conversionService = $referenceSearchService->get(ConversionService::REFERENCE_NAME);
 
@@ -34,6 +35,7 @@ class CustomSqsOutboundChannelAdapterBuilder extends EnqueueOutboundChannelAdapt
         $messageBrokerHeadersReferenceName = new ($this->messageBrokerHeadersReferenceName)();
 
         $headerMapper = DefaultHeaderMapper::createWith([], $this->headerMapper, $conversionService);
+
         return new CustomSqsOutboundChannelAdapter(
             CachedConnectionFactory::createFor(new HttpReconnectableConnectionFactory($connectionFactory)),
             $this->queueName,

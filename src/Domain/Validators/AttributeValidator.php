@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Domain\Validators;
+namespace Frete\Core\Domain\Validators;
 
 class AttributeValidator extends Validator
 {
     public function __construct(
         public readonly string $attribute,
         protected ?Validator $validator = null
-    ) {}
+    ) {
+    }
 
     public function getValidator(): Validator
     {
@@ -24,7 +25,7 @@ class AttributeValidator extends Validator
     public function getErrorMessage()
     {
         return [
-            $this->attribute => $this->validator->getErrorMessage()
+            $this->attribute => $this->validator->getErrorMessage(),
         ];
     }
 

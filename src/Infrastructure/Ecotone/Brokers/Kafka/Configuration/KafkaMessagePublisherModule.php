@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration;
+namespace Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\Configuration;
 
-use Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka\KafkaOutboundChannelAdapterBuilder;
 use Ecotone\AnnotationFinder\AnnotationFinder;
 use Ecotone\Messaging\Attribute\ModuleAnnotation;
 use Ecotone\Messaging\Config\Annotation\AnnotationModule;
@@ -15,6 +14,7 @@ use Ecotone\Messaging\Handler\Gateway\GatewayProxyBuilder;
 use Ecotone\Messaging\Handler\Gateway\ParameterToMessageConverter\{GatewayHeaderBuilder, GatewayHeaderValueBuilder, GatewayHeadersBuilder, GatewayPayloadBuilder};
 use Ecotone\Messaging\Handler\InterfaceToCallRegistry;
 use Ecotone\Messaging\{MessageHeaders, MessagePublisher};
+use Frete\Core\Infrastructure\Ecotone\Brokers\Kafka\KafkaOutboundChannelAdapterBuilder;
 
 #[ModuleAnnotation]
 final class KafkaMessagePublisherModule extends NoExternalConfigurationModule implements AnnotationModule
@@ -69,7 +69,8 @@ final class KafkaMessagePublisherModule extends NoExternalConfigurationModule im
                         ->withAutoDeclareOnSend($messagePublisher->isAutoDeclareOnSend())
                         ->withHeaderMapper($messagePublisher->getHeaderMapper())
                         ->withDefaultConversionMediaType($mediaType)
-                );
+                )
+            ;
         }
     }
 

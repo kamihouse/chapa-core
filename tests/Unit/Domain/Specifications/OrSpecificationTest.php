@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain\Specifications;
 
-use Chapa\Core\Domain\Specifications\{OrSpecification, Specification};
+use Frete\Core\Domain\Specifications\{OrSpecification, Specification};
 use Tests\TestCase;
 
+/**
+ * @internal
+ */
 class OrSpecificationTest extends TestCase
 {
     public function testIsSatisfiedBy(): void

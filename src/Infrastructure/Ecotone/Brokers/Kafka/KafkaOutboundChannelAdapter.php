@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Chapa\Core\Infrastructure\Ecotone\Brokers\Kafka;
+namespace Frete\Core\Infrastructure\Ecotone\Brokers\Kafka;
 
-use Chapa\Core\Infrastructure\Ecotone\Brokers\CustomEnqueueOutboundChannelAdapter;
-use Chapa\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\IHeaderMessage;
 use Ecotone\Enqueue\{CachedConnectionFactory, OutboundMessageConverter};
 use Ecotone\Messaging\Message;
 use Enqueue\RdKafka\RdKafkaTopic;
+use Frete\Core\Domain\Event;
+use Frete\Core\Infrastructure\Ecotone\Brokers\CustomEnqueueOutboundChannelAdapter;
+use Frete\Core\Infrastructure\Ecotone\Brokers\MessageBrokerHeaders\IHeaderMessage;
 use Interop\Queue\Message as buildMessageReturn;
 
 final class KafkaOutboundChannelAdapter extends CustomEnqueueOutboundChannelAdapter
 {
-    public function __construct(CachedConnectionFactory $connectionFactory, private RdKafkaTopic $topic, bool $autoDeclare, OutboundMessageConverter $outboundMessageConverter, IHeaderMessage $messageBrokerHeaders)
+    public function __construct(CachedConnectionFactory $connectionFactory, private RdKafkaTopic $topic, bool $autoDeclare, OutboundMessageConverter $outboundMessageConverter, private IHeaderMessage $messageBrokerHeaders)
     {
         parent::__construct(
             $connectionFactory,
@@ -32,19 +33,19 @@ final class KafkaOutboundChannelAdapter extends CustomEnqueueOutboundChannelAdap
 
     public function buildMessage(Message $message): buildMessageReturn
     {
-        $message = parent::buildMessage($message);
-        $props = $message->getProperties();
+        /** @var \Enqueue\RdKafka\RdKafkaMessage */
+        $kafkaMessage = parent::buildMessage($message);
+        $props = $kafkaMessage->getProperties();
 
         if (isset($props['partition']) && is_int($props['partition'])) {
-            // @phpstan-ignore-next-line
-            $message->setPartition($props['partition']);
+            $kafkaMessage->setPartition($props['partition']);
         }
 
-        if (isset($props['key']) && is_int($props['key'])) {
-            // @phpstan-ignore-next-line
-            $message->setKey($props['key']);
+        if (is_subclass_of($message->getPayload(), Event::class)) {
+            $payload = $message->getPayload();
+            $kafkaMessage->setKey($payload->getIdentifier());
         }
 
-        return $message;
+        return $kafkaMessage;
     }
 }
